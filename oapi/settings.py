@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'ckeditor',
     'ckeditor_uploader',
-    'stdimage'
+    'stdimage',
+    'rest_framework',
+    'drf_yasg',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -56,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'oapi.urls'
@@ -142,11 +146,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_BASEPATH = os.path.join(BASE_DIR, "/static/ckeditor/ckeditor/")
 # 配置CKEditor的模板路径
 CKEDITOR_CONFIGS = {
-'default': {
-'toolbar': 'full',
-'height': 300,
-'width': 900,
-},
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+    },
 }
 # 使用默认的主题名称
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -158,3 +162,15 @@ CKEDITOR_BROWSE_SHOW_DIRS = True
 # 按存储在其中的目录对图像进行分组，并按日期排序
 CKEDITOR_IMAGE_BACKEND = "pillow"
 # 启用缩略图
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissions'
+    ]
+}
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

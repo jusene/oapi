@@ -53,6 +53,19 @@ class PoductInfoResource(resources.ModelResource):
 
 
 class ProductInfoAdmin:
+    form_layout = (
+        Main(
+            Fieldset('产品部分',
+                     'product_name', 'product_describe', 'product_manager',),
+            Fieldset('图片部分',
+                     'product_picture', 'product_detail',),
+        ),
+        Side(
+            Fieldset('时间部分',
+                     'create_time', 'upload_time',),
+        )
+    )
+
     list_display = [
         'id',
         'product_name',
